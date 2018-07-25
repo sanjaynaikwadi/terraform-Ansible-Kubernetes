@@ -11,8 +11,7 @@ Google cloud SDK needs to be installed on your deployment machine, if your insta
 once you install the SDK and follow the instruction
    ```
    gcloud init
-  
-    ```
+   ```
 Once your set you either create a new project from google cloud console or you can use command line to create a project, I am assuming you have a 
 project created and now lets generate a json file for terraform for authentication
  
@@ -20,7 +19,6 @@ project created and now lets generate a json file for terraform for authenticati
    gcloud iam service-accounts create terraform  
    gcloud iam service-accounts keys create gce-terraform-key.json --iam-account=terraform@<project_id>.iam.gserviceaccount.com  
    gcloud projects add-iam-policy-binding kubernetes-the-hard-way-194619 --member='serviceAccount:terraform@<project_id>.iam.gserviceaccount.com' --role='roles/editor'
-
    ```
 Above can also be achieved from google cloud console.
 
