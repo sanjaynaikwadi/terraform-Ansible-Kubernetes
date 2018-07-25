@@ -62,4 +62,16 @@ Once everything is set lets run the playbook
    $ ansible-playbook site.yaml
    ```
 
+Once your Install is successful, let grab a admin.conf file and verify the cluster status, I have kubectl installed on my development machine
+
+   ```
+   scp -i <private_key.pem> sanjay.naikwadi@35.202.154.208:/etc/kubernetes/admin.conf .
+   ```
+   ```
+   $kubectl get nodes
+   NAME      STATUS    ROLES     AGE       VERSION
+   cont-1    Ready     master    47m       v1.11.1
+   work-1    Ready     <none>    43m       v1.11.1
+   work-2    Ready     <none>    43m       v1.11.1
+   ```
 
