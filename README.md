@@ -38,6 +38,7 @@ Ansible
   - Deployment environment must have Ansible `2.4.0+`
   - Make sure you specify private key path to make ssh connection to instances, I am assuming that you already have added your SSH key in googlecloud console, use the same username for making conncetion with specifying the private key
   - Modify the `host.ini`, add the Master and Worker node ip which you will the get from terraform output
+    
     ```
     [master]
     35.202.154.208
@@ -47,15 +48,16 @@ Ansible
     [kube-cluster:children]
     master
     node
-
-   [all:vars]
-   ansible_connection=ssh
-   ansible_ssh_user=sanjay.naikwadi
-   ansible_ssh_private_key_file=<path_to_file>
-   ```
-  - Modify `group_vars/all.yml`, select the flannel or calico, I have used flannel
+    [all:vars]
+    ansible_connection=ssh
+    ansible_ssh_user=sanjay.naikwadi
+    ansible_ssh_private_key_file=<path_to_file>
+    ```
+ 
+   - Modify `group_vars/all.yml`, select the flannel or calico, I have used flannel
 
 Once everything is set lets run the playbook
+   
    ```
    $ ansible-playbook site.yaml
    ```
