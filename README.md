@@ -8,7 +8,7 @@ Build a Kubernetes cluster using Ansible with kubeadm. The goal is easily instal
   - Debian 9
 
 Google cloud SDK needs to be installed on your deployment machine, if your installing for first time then you can run the following command
-once you install the SDK and follow the instruction
+ and follow the instruction
    ```
    gcloud init
    ```
@@ -33,18 +33,31 @@ Terraform
     terraform plan
     terraform apply
     ```
-
-System requirements:
+Ansible
 
   - Deployment environment must have Ansible `2.4.0+`
-  - Master and nodes must have passwordless SSH access/or use keys in ansible.cfg
+  - Make sure you specify private key path to make ssh connection to instances, I am assuming that you already have added your SSH key in googlecloud console, use the same username for making conncetion with specifying the private key
+  - Modify the `host.ini`, add the Master and Worker node ip which you will the get from terraform output
+    ```
+    [master]
+    35.202.154.208
+    [node]
+    35.192.64.78
+    35.192.210.4
+    [kube-cluster:children]
+    master
+    node
 
+   [all:vars]
+   ansible_connection=ssh
+   ansible_ssh_user=sanjay.naikwadi
+   ansible_ssh_private_key_file=<path_to_file>
+   ```
+  - Modify `group_vars/all.yml`, select the flannel or calico, I have used flannel
 
-
-
-# Clone the directory 
-
-# Modify the settings as per your need
--group_vars/all.yml - Select Calico or Flannel
+Once everything is set lets run the playbook
+   ```
+   $ ansible-playbook site.yaml
+   ```
 
 
